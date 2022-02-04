@@ -23,17 +23,7 @@ function getDay(date, lang) {
 			6: 'Суббота',
 		},
 	};
-	let enDays = dayNames.en;
-	let ruDays = dayNames.ru;
-	let arrayEn = [];
-	let arrayRu = [];
-	for (let key in enDays) {
-		arrayEn.push(enDays[key]);
-	}
-	for (let key in ruDays) {
-		arrayRu.push(ruDays[key]);
-	}
-	return lang === 'en' ? arrayEn[date.getDay()] : arrayRu[date.getDay()];
+	return dayNames[lang][date.getDay()];
 }
 
 // Принимает объект даты, и должно вернуть компоненты даты в виде строки.
@@ -42,11 +32,12 @@ function getDay(date, lang) {
 function formatTime(date) {
 	let hours = date.getHours();
 	let minutes = date.getMinutes();
-	hours = hours < 10 ? '0' + hours : hours;
-	minutes = minutes < 10 ? '0' + minutes : minutes;
-	return `${hours}:${minutes}`;
-}
+	return addZero(hours) + ":" + addZero(minutes);
+};
 
+function addZero(elem) {
+	return elem < 10 ? '0' + elem : elem;
+};
 /*
 Напишите функцию getLastDayOfMonth(year, month), 
 возвращающую последнее число месяца. Иногда это 30, 31
